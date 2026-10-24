@@ -15,6 +15,9 @@
     </nav>
 
     <main>
+        <?php if ($message = get_flash()): ?>
+            <p class="flash"><?= e($message) ?></p>
+        <?php endif; ?>
         <?= $content ?>
     </main>
 </body>

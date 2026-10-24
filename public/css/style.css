@@ -64,3 +64,10 @@ main {
     color: #b3261e;
     font-size: 14px;
 }
+.flash {
+    padding: 10px 14px;
+    background: #e6f2ec;
+    border: 1px solid #b7d8c6;
+    border-radius: 4px;
+    color: #2f6b4f;
+}

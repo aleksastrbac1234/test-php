@@ -41,3 +41,16 @@ function verify_csrf()
         exit('Page expired. Go back and try again.');
     }
 }
+
+function flash($message)
+{
+    $_SESSION['flash'] = $message;
+}
+
+function get_flash()
+{
+    $message = $_SESSION['flash'] ?? null;
+    unset($_SESSION['flash']);
+
+    return $message;
+}
