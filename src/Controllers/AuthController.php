@@ -34,8 +34,36 @@ class AuthController
             view('auth/register', ['errors' => $errors, 'old' => $_POST]);
             return;
         }
-        flash('Your account has been created. Welcome!');
 
+        flash('Your account has been created. Welcome!');
         redirect('/page-a');
+    }
+
+    public function showLogin()
+    {
+        view('auth/login');
+    }
+
+    public function login()
+    {
+        verify_csrf();
+
+        if (!$this->authService->login($_POST['email'] ?? '', $_POST['password'] ?? '')) {
+            view('auth/login', ['error' => 'Invalid email or password.', 'old' => $_POST]);
+            return;
+        }
+
+        flash('Welcome back!');
+        redirect('/page-a');
+    }
+
+    public function logout()
+    {
+        verify_csrf();
+
+        $this->authService->logout();
+
+        flash('You have been logged out.');
+        redirect('/login');
     }
 }

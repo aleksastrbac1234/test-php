@@ -28,12 +28,34 @@ class AuthService
             return $errors;
         }
 
-        $userId = $this->users->create($name, $email, password_hash($password, PASSWORD_DEFAULT));
+        $this->users->create($name, $email, password_hash($password, PASSWORD_DEFAULT));
 
-        $this->loginUser($userId, 'user');
+        $this->loginUser($this->users->findByEmail($email));
         $this->events->log('registration');
 
         return [];
+    }
+
+    public function login(string $email, string $password): bool
+    {
+        $user = $this->users->findByEmail(strtolower(trim($email)));
+
+        if (!$user || !password_verify($password, $user['password'])) {
+            return false;
+        }
+
+        $this->loginUser($user);
+        $this->events->log('login');
+
+        return true;
+    }
+
+    public function logout(): void
+    {
+        $this->events->log('logout');
+
+        $_SESSION = [];
+        session_regenerate_id(true);
     }
 
     private function validateRegistration(string $name, string $email, string $password, string $confirmation): array
@@ -61,11 +83,12 @@ class AuthService
         return $errors;
     }
 
-    private function loginUser(int $userId, string $role): void
+    private function loginUser(array $user): void
     {
         session_regenerate_id(true);
 
-        $_SESSION['user_id'] = $userId;
-        $_SESSION['user_role'] = $role;
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_role'] = $user['role'];
     }
 }

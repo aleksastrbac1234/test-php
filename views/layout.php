@@ -7,18 +7,28 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="/" class="logo">Activity Tracker</a>
-        <div>
-            <a href="/">Home</a>
-        </div>
-    </nav>
-
-    <main>
-        <?php if ($message = get_flash()): ?>
-            <p class="flash"><?= e($message) ?></p>
+<nav>
+    <a href="/" class="logo">Activity Tracker</a>
+    <div class="nav-links">
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <span><?= e($_SESSION['user_name'] ?? '') ?></span>
+            <form method="POST" action="/logout">
+                <?= csrf_field() ?>
+                <button type="submit" class="link-button">Logout</button>
+            </form>
+        <?php else: ?>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
         <?php endif; ?>
-        <?= $content ?>
-    </main>
+    </div>
+</nav>
+
+<main>
+    <?php if ($message = get_flash()): ?>
+        <p class="flash"><?= e($message) ?></p>
+    <?php endif; ?>
+
+    <?= $content ?>
+</main>
 </body>
 </html>

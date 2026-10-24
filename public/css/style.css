@@ -71,3 +71,33 @@ main {
     border-radius: 4px;
     color: #2f6b4f;
 }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-links form {
+    margin: 0;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #555;
+    font: inherit;
+    cursor: pointer;
+}
+
+.link-button:hover {
+    color: #222;
+}
+
+.flash {
+    padding: 10px 14px;
+    background: #e6f2ec;
+    border: 1px solid #b7d8c6;
+    border-radius: 4px;
+    color: #2f6b4f;
+}
