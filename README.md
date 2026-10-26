@@ -18,3 +18,12 @@ php -S localhost:8000 -t public public/index.php
 If your MySQL user or password is different, update `config/config.php` before running the seed. Then open http://localhost:8000.
 `mysql -u root -p` asks for your MySQL password. If your root user has no password, just press Enter.
 Open http://localhost:8000
+
+## Test accounts
+
+The seed script creates these accounts (password for all is `password`):
+
+- Admin: `admin@example.com`
+- Users: `john@example.com`, `emma@example.com`, `luka@example.com`
+
+Running the seed again deletes all data and creates it from scratch, so log in again after running it.
