@@ -6,6 +6,6 @@ class HomeController
 {
     public function index()
     {
-        view('home');
+        redirect(isset($_SESSION['user_id']) ? '/page-a' : '/login');
     }
 }

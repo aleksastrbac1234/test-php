@@ -54,3 +54,10 @@ function get_flash()
 
     return $message;
 }
+
+function valid_date($value)
+{
+    $date = DateTime::createFromFormat('Y-m-d', (string) $value);
+
+    return $date && $date->format('Y-m-d') === $value ? $value : null;
+}

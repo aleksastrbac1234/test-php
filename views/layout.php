@@ -11,6 +11,12 @@
     <a href="/" class="logo">Activity Tracker</a>
     <div class="nav-links">
         <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="/page-a">Page A</a>
+            <a href="/page-b">Page B</a>
+            <?php if (($_SESSION['user_role'] ?? '') === 'admin'): ?>
+                <a href="/statistics">Statistics</a>
+                <a href="/reports">Reports</a>
+            <?php endif; ?>
             <span><?= e($_SESSION['user_name'] ?? '') ?></span>
             <form method="POST" action="/logout">
                 <?= csrf_field() ?>

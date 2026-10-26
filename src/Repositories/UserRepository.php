@@ -23,4 +23,8 @@ class UserRepository implements UserRepositoryInterface
 
         return (int)Database::get()->lastInsertId();
     }
+    public function all(): array
+    {
+        return Database::get()->query('SELECT id, name, email FROM users ORDER BY name')->fetchAll();
+    }
 }
