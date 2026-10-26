@@ -36,7 +36,7 @@ function csrf_field()
 
 function verify_csrf()
 {
-    if(!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    if (!hash_equals(csrf_token(), $_POST['csrf_token'] ?? '')) {
         http_response_code(419);
         exit('Page expired. Go back and try again.');
     }

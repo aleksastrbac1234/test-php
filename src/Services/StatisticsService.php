@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
-use DateTime;
+
 
 class StatisticsService
 {
